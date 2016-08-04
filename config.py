@@ -4,7 +4,7 @@ import os
 COMP_DICT_URL = 'ftp://ftp.wwpdb.org/pub/pdb/data/monomers/components.cif'
 
 # WHERE TO STORE OUTPUT DATA
-DATA_DIR = os.path.join(os.environ['HOME'], 'data', 'residue_types')
+DATA_DIR = os.path.join(os.environ['HOME'], 'data', 'pdb_residue_types')
 
 # WHERE TO STORE THE CHEMCOMP MMCIF FILE LOCALLY
 COMP_DICT_FILE = os.path.join(DATA_DIR, 'components.cif')
