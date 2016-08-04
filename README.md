@@ -3,6 +3,10 @@
 Extract dictionaries of types of [PDB](http://www.rcsb.org/pdb/home/home.do)
 residues from the Chemical Component dictionary.
 
+## Dependencies
+
+    pip install -r requirements.txt
+
 ## Scripts
 
 - `config.py`: Set up where to save files
