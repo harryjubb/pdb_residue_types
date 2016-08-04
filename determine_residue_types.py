@@ -6,7 +6,7 @@ residues.
 import os
 import simplejson as json
 
-from config import DATA_DIR, COMP_DICT_FILE, RESIDUE_TYPES_JSON_FILE
+from config import DATA_DIR, COMP_DICT_FILE, RESIDUE_TYPES_JSON_FILE, RESIDUE_TYPES_BY_RESIDUE_JSON_FILE
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -93,6 +93,7 @@ non_polymer_types = set([x for x in all_res_types if
                          'NON-POLYMER' in x.upper()])
 
 # RESIDUE TYPE JSON
+# E.G. {'PEPTIDE': ['ALA', 'CYS', 'GLU'...]}
 print 'Collecting residue types for all chemical components...'
 residue_types = {
     'peptide': [x['id'] for x in compounds.itervalues() if
@@ -125,3 +126,19 @@ print 'Statistics'
 
 for res_type, type_compounds in residue_types.iteritems():
     print res_type, ':', len(type_compounds)
+
+# RESIDUE TYPES BY RESIDUE (AS OPPOSED TO BY TYPE)
+# E.G. {'ALA': 'L-PEPTIDE LINKING', 'FMM': 'NON-POLYMER'...}
+residue_types_by_residue = {}
+
+for res_type, type_compounds in residue_types.iteritems():
+    for compound in type_compounds:
+        if compound not in residue_types_by_residue:
+            residue_types_by_residue[compound] = res_type
+        else:
+            raise ValueError('residue_types_by_residue should not have '
+                             'duplicates ({})'.format(compound))
+
+print 'Writing residue types by residue JSON file...'
+with open(RESIDUE_TYPES_BY_RESIDUE_JSON_FILE, 'wb') as fo:
+    json.dump(residue_types_by_residue, fo)
