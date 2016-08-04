@@ -8,7 +8,7 @@ import simplejson as json
 
 from config import DATA_DIR, COMP_DICT_FILE, RESIDUE_TYPES_JSON_FILE
 
-SCRIPT_PATH = os.path.realpath(__file__)
+SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 # MMCIF FIELDS TO EXTRACT FOR EACH RESIDUE
 FIELDS_OF_INTEREST = set([
@@ -29,6 +29,8 @@ if not os.path.exists(DATA_DIR):
 
 # CHECK THAT THE CHEMICAL COMPONENTS DICTIONARY HAS BEEN DOWNLOADED
 if not os.path.exists(COMP_DICT_FILE):
+
+    print 'Dictionary file not found, downloading...'
 
     # DOWNLOAD IF NOT
     os.system('python {}'.format(os.path.join(SCRIPT_PATH,
