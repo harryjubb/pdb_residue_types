@@ -13,3 +13,5 @@ COMP_DICT_FILE = os.path.join(DATA_DIR, 'components.cif')
 RESIDUE_TYPES_JSON_FILE = os.path.join(DATA_DIR, 'pdb_residue_types.json')
 RESIDUE_TYPES_BY_RESIDUE_JSON_FILE = os.path.join(DATA_DIR,
                                                   'pdb_residue_types_by_residue.json')
+
+WATERS = set(['HOH', 'DOD'])

@@ -6,7 +6,7 @@ residues.
 import os
 import simplejson as json
 
-from config import DATA_DIR, COMP_DICT_FILE, RESIDUE_TYPES_JSON_FILE, RESIDUE_TYPES_BY_RESIDUE_JSON_FILE
+from config import DATA_DIR, COMP_DICT_FILE, RESIDUE_TYPES_JSON_FILE, RESIDUE_TYPES_BY_RESIDUE_JSON_FILE, WATERS
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -115,7 +115,10 @@ residue_types = {
                    x['type'] in saccharide_types],
 
     'non_polymer': [x['id'] for x in compounds.itervalues() if
-                    x['type'] in non_polymer_types]
+                    x['type'] in non_polymer_types and x['id'] not in WATERS],
+
+    'water': [x['id'] for x in compounds.itervalues() if
+              x['type'] in non_polymer_types and x['id'] in WATERS],
 }
 
 print 'Writing residue types JSON file...'
