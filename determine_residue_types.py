@@ -6,7 +6,7 @@ residues.
 import os
 import simplejson as json
 
-from config import DATA_DIR, COMP_DICT_FILE, RESIDUE_TYPES_JSON_FILE, RESIDUE_TYPES_BY_RESIDUE_JSON_FILE, WATERS
+from config import DATA_DIR, COMP_DICT_FILE, RESIDUE_TYPES_JSON_FILE, RESIDUE_TYPES_BY_RESIDUE_JSON_FILE, NON_STD_RES_PARENTS_JSON_FILE, WATERS
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -124,6 +124,17 @@ residue_types = {
 print 'Writing residue types JSON file...'
 with open(RESIDUE_TYPES_JSON_FILE, 'wb') as fo:
     json.dump(residue_types, fo)
+
+# PARENT RESIDUES OF NON-STD AMINO ACIDS
+print 'Determining parents of non-standard amino acids...'
+non_std_parents = {
+    compound['id']: compound['mon_nstd_parent_comp_id'] for
+    compound in compounds.itervalues()
+}
+
+print 'Writing parents of non-standard amino acids JSON file...'
+with open(NON_STD_RES_PARENTS_JSON_FILE, 'wb') as fo:
+    json.dump(non_std_parents, fo)
 
 print 'Statistics'
 
